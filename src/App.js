@@ -1,23 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import { motion } from "framer-motion";
+import "./App.css";
 
 function App() {
+  const container = {
+    hidden: {
+      opacity: 0,
+    },
+    show: {
+      opacity: 1,
+      transition: {
+        delayChildren: 2,
+      },
+    },
+  };
+  const item = {
+    hidden: {
+      opacity: 0,
+      scale: 0,
+    },
+    show: {
+      opacity: 1,
+      scale: 1,
+    },
+  };
+  function onUpdate(latest) {
+    console.log("complete");
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <motion.div
+        variants={container}
+        initial="hidden"
+        animate="show"
+        onAnimationComplete={onUpdate}
+      >
+        <motion.h1 variants={item}>Hello</motion.h1>
+        <motion.h1>Goodbye</motion.h1>
+      </motion.div>
     </div>
   );
 }
